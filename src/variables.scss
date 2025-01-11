@@ -1,0 +1,13 @@
+:root {
+  color-scheme: light dark;
+
+  --back-black: #1a1a1a;
+  --back-white: #fff;
+
+  --background-color: light-dark(var(--back-white), var(var(--back-black)));
+
+  --back-element-1: light-dark(
+    color-mix(in srgb, var(--back-black) 100%, white 25%),
+    color-mix(in srgb, var(--back-white) 100%, black 25%)
+  );
+}
