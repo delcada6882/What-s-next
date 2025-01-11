@@ -1,13 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@property --back-black {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #1a1a1a;
+}
+@property --back-white {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #fff;
+}
+
+@property --background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+@property --contrast-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1a1a1a;
+}
+
+@property --back-element-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+@property --back-element-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+@property --back-element-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+@property --back-element-4 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+
+@property --border-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+@property --border-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+
+@property --primary-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #7411ee;
+}
+
+$header-size: 4rem;
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Work Sans", serif;
+}
 :root {
-  color-scheme: light dark;
+  interpolate-size: allow-keywords;
+  color-scheme: dark;
 
-  --back-black: #1a1a1a;
-  --back-white: #fff;
+  color: light-dark(black, white);
 
-  --background-color: light-dark(var(--back-white), var(var(--back-black)));
+  --background-color: light-dark(var(--back-white), var(--back-black));
+  --contrast-color: light-dark(var(--back-black), var(--back-white));
 
   --back-element-1: light-dark(
-    color-mix(in srgb, var(--back-black) 100%, white 25%),
-    color-mix(in srgb, var(--back-white) 100%, black 25%)
+    hsl(from var(--background-color) h s 90%),
+    hsl(from var(--background-color) h s 15%)
   );
+  --back-element-2: light-dark(
+    hsl(from var(--background-color) h s 80%),
+    hsl(from var(--background-color) h s 20%)
+  );
+  --back-element-3: light-dark(
+    hsl(from var(--background-color) h s 70%),
+    hsl(from var(--background-color) h s 25%)
+  );
+  --back-element-4: light-dark(
+    hsl(from var(--background-color) h s 60%),
+    hsl(from var(--background-color) h s 30%)
+  );
+
+  --border-1: var(--back-element-2);
+  --border-2: var(--back-element-3);
 }
+
+// align-content: center;
+// when doing psuedo classes with inputs, use ':user-valid' and 'user-invalid' so that the user has to interact with it first

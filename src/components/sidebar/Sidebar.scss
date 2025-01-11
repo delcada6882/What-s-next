@@ -1,0 +1,14 @@
+@import "../../variables.scss";
+
+$header-size-border: calc($header-size + 0.5px);
+
+#sidebar {
+  width: 20vw;
+  background-color: var(--background-color);
+  position: fixed;
+  left: 0;
+  top: calc($header-size-border);
+  height: calc(100vh - $header-size-border);
+  border-right: 1px solid var(--border-1);
+  z-index: 3;
+}

@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .App {
   text-align: center;
 }
@@ -5,6 +7,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  z-index: 2;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,19 +16,63 @@
   }
 }
 
+.App {
+  width: 80vw;
+  height: calc(100vh - 4rem);
+  position: absolute;
+  top: $header-size;
+  left: 20vw;
+  background-color: var(--border-1);
+}
+
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  width: 100%;
   color: white;
+  height: 100%;
+}
+
+.test {
+  display: block;
+  position: relative;
+  z-index: 4;
+  padding: 100px;
+  backdrop-filter: blur(10px);
+  background-color: color-mix(
+    in srgb,
+    var(--primary-color) 10%,
+    transparent 100%
+  );
+  position: absolute;
+  top: 10rem;
+  left: 30rem;
+  border: 2px solid rgba(#fff, $alpha: 0.25);
+  border-radius: 5px;
+  .test-child {
+    border: 2px solid rgba(#fff, $alpha: 0.25);
+    border-radius: 5px;
+    padding: 50px;
+    backdrop-filter: blur(10px);
+    background-color: color-mix(
+      in srgb,
+      var(--primary-color) 10%,
+      transparent 100%
+    );
+    color: white;
+  }
+}
+
+p {
+  z-index: 2;
 }
 
 .App-link {
   color: #61dafb;
+  z-index: 2;
 }
 
 @keyframes App-logo-spin {
