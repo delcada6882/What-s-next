@@ -16,8 +16,9 @@ root.render(
   <React.StrictMode>
     <Header />
     <Sidebar />
+    <div id="fill-back"></div>
     <div id="background-pattern"></div>
-    <Cursor />
+    {/* <Cursor /> */}
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />

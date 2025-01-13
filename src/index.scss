@@ -7,7 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   scrollbar-width: 0;
+  // background-color: var(--background-color);]
+  background-color: gray;
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -17,7 +20,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+#fill-back {
+  position: relative;
+  background-color: green;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  clip-path: polygon(
+    0% 0%,
+    0% 100%,
+    25% 100%,
 
+    25% 25%,
+    75% 25%,
+    75% 75%,
+    25% 75%,
+
+    25% 100%,
+    100% 100%,
+    100% 0%
+  );
+  transition: 0.2s;
+}
 #background-pattern {
   $background-size: 35px;
   $position: -25px;
@@ -25,10 +49,10 @@ code {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  background: radial-gradient(rgba(19, 19, 19, 0) 1.5px, rgb(19, 19, 19) 10%);
+  background: radial-gradient(rgba(19, 19, 19, 0) 1.5px, rgb(8, 8, 8) 10%);
   background-size: $background-size $background-size;
   background-position: -35px $position;
 }

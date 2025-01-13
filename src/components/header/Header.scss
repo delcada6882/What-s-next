@@ -4,12 +4,11 @@
   $padding-size: 20px;
   position: fixed;
   top: 0;
-  background-color: var(--background-color);
+  // background-color: var(--border-1);
   width: calc(100vw - calc($padding-size * 2));
   height: $header-size;
   display: flex;
   align-items: center;
   padding: 0 $padding-size;
-  border-bottom: 1px solid var(--border-1);
   z-index: 3;
 }

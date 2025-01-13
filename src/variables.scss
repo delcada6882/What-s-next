@@ -3,7 +3,7 @@
 @property --back-black {
   syntax: "<color>";
   inherits: false;
-  initial-value: #1a1a1a;
+  initial-value: hsl(0, 0%, 3%);
 }
 @property --back-white {
   syntax: "<color>";
@@ -61,6 +61,7 @@
 }
 
 $header-size: 4rem;
+$space-from-edges: 1rem;
 
 * {
   padding: 0;
@@ -78,19 +79,19 @@ $header-size: 4rem;
 
   --back-element-1: light-dark(
     hsl(from var(--background-color) h s 90%),
-    hsl(from var(--background-color) h s 15%)
+    hsl(from var(--background-color) h s 7%)
   );
   --back-element-2: light-dark(
     hsl(from var(--background-color) h s 80%),
-    hsl(from var(--background-color) h s 20%)
+    hsl(from var(--background-color) h s 12%)
   );
   --back-element-3: light-dark(
     hsl(from var(--background-color) h s 70%),
-    hsl(from var(--background-color) h s 25%)
+    hsl(from var(--background-color) h s 17%)
   );
   --back-element-4: light-dark(
     hsl(from var(--background-color) h s 60%),
-    hsl(from var(--background-color) h s 30%)
+    hsl(from var(--background-color) h s 23%)
   );
 
   --border-1: var(--back-element-2);
