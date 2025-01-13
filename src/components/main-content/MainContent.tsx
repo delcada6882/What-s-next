@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
-import "./Sidebar.scss";
+import "./MainContent.scss";
 
-function Sidebar({
+function MainContent({
   gap,
   headerSize,
-  width,
+  sidebarSize,
   borderRadius,
   debug,
   left,
   top,
+  width,
   height,
 }: {
   gap: number;
   headerSize: number;
-  width: number;
+  sidebarSize: number;
   borderRadius: number;
   debug: boolean;
   left?: number;
   top?: number;
+  width?: number;
   height?: number;
 }) {
   const [finalStyle, setFinalStyle] = useState<any>();
@@ -32,10 +34,10 @@ function Sidebar({
       });
     } else {
       setFinalStyle({
-        left: gap,
+        left: `calc(${sidebarSize}px + calc(${gap}px * 2))`,
         height: `calc(100vh - calc(${headerSize}px + ${gap}px))`,
-        width: width,
         top: headerSize,
+        width: `calc(100vw - calc(${sidebarSize}px + calc(${gap}px * 3)))`,
         borderRadius: borderRadius,
       });
     }
@@ -46,10 +48,10 @@ function Sidebar({
   }, []);
 
   return (
-    <div id="sidebar" style={finalStyle}>
-      <p>Sidebar works</p>
+    <div id="main-content" style={finalStyle}>
+      <p>Main content</p>
     </div>
   );
 }
 
-export default Sidebar;
+export default MainContent;

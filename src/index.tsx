@@ -7,6 +7,7 @@ import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Cursor from "./components/cursor/Cursor";
+import TodoView from "./views/to-do-view/TodoView";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,16 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Header />
-    <Sidebar />
-    <div id="fill-back"></div>
-    <div id="background-pattern"></div>
-    {/* <Cursor /> */}
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <TodoView />
   </React.StrictMode>
 );
 

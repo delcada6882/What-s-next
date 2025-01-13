@@ -1,18 +1,9 @@
 @import "../../variables.scss";
 
-$header-size-border: calc($header-size + 0.5px);
-$offset: 50px;
-$sidebar-size: calc(25rem - calc($offset * 2));
-
 #sidebar {
-  border-radius: 20px;
-  width: $sidebar-size;
   background-color: var(--back-element-1);
   position: fixed;
-  left: $offset;
-  top: calc($header-size-border);
-  height: calc(50rem - $header-size-border);
   border: 1px solid var(--border-1);
   z-index: 3;
-  background-color: blue;
+  transition: 0.2s;
 }

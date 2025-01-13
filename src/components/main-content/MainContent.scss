@@ -1,0 +1,14 @@
+#main-content {
+  background-color: transparent;
+  border: 1px solid var(--border-1);
+
+  position: fixed;
+  width: 90rem;
+  height: 50rem;
+  top: 0;
+  z-index: 3;
+  transition: 0.2s;
+  p {
+    padding: 10px;
+  }
+}

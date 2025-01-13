@@ -6,6 +6,9 @@ function Header() {
       <div className="left">
         <h1>What's Next?</h1>
       </div>
+      {/* <div className="right">
+        <a>Home</a>
+      </div> */}
     </div>
   );
 }
