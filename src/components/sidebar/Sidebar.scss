@@ -1,9 +1,100 @@
 @import "../../variables.scss";
 
+@keyframes moveRightSide {
+  0% {
+    transform: scale(1);
+    left: var(--gaps);
+    box-shadow: rgba(0, 0, 0, 0) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0) 0px 18px 36px -18px inset;
+    border-width: 1px;
+  }
+  20% {
+    transform: scale(0.95);
+    left: var(--gaps);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-width: 0px;
+  }
+  80% {
+    transform: scale(0.95);
+    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-width: 0px;
+  }
+  100% {
+    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
+    transform: scale(1);
+    box-shadow: rgba(0, 0, 0, 0) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0) 0px 18px 36px -18px inset;
+    border-width: 1px;
+  }
+}
+@keyframes moveLeftSide {
+  0% {
+    transform: scale(1);
+    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
+    box-shadow: rgba(0, 0, 0, 0) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0) 0px 18px 36px -18px inset;
+    border-width: 1px;
+  }
+  20% {
+    transform: scale(0.95);
+    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-width: 0px;
+  }
+  80% {
+    transform: scale(0.95);
+    left: var(--gaps);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    border-width: 0px;
+  }
+  100% {
+    transform: scale(1);
+    left: var(--gaps);
+    box-shadow: rgba(0, 0, 0, 0) 0px 30px 60px -12px inset,
+      rgba(0, 0, 0, 0) 0px 18px 36px -18px inset;
+    border-width: 1px;
+  }
+}
+
 #sidebar {
   background-color: var(--back-element-1);
-  position: fixed;
+  position: absolute;
   border: 1px solid var(--border-1);
-  z-index: 3;
+  z-index: 4;
   transition: 0.2s;
+  button {
+    position: relative;
+  }
+  $duration: 1.5s;
+  &.play-right-side {
+    animation-name: moveRightSide;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  &.play-left-side {
+    animation-name: moveLeftSide;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  &.disabled-side {
+    pointer-events: none;
+  }
 }
+// #sidebar::after {
+//   position: absolute;
+//   right: 0;
+//   width: 10px;
+//   display: block;
+//   content: "";
+//   top: 0;
+//   // width: 100%;
+//   height: 100%;
+//   background-color: rgba($color: #fff, $alpha: 0.1);
+//   backdrop-filter: blur(1px);
+//   border-radius: 20px;
+// }

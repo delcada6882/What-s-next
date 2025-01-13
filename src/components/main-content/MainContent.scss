@@ -1,7 +1,31 @@
+@import "../../variables.scss";
+
+@keyframes moveRightMain {
+  0% {
+    left: var(--gaps);
+  }
+  20% {
+    left: var(--gaps);
+  }
+  100% {
+    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+  }
+}
+@keyframes moveLeftMain {
+  0% {
+    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+  }
+  20% {
+    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+  }
+  100% {
+    left: var(--gaps);
+  }
+}
+
 #main-content {
   background-color: transparent;
   border: 1px solid var(--border-1);
-
   position: fixed;
   width: 90rem;
   height: 50rem;
@@ -10,5 +34,19 @@
   transition: 0.2s;
   p {
     padding: 10px;
+  }
+  $duration: 1.5s;
+  &.play-right-main {
+    animation-name: moveRightMain;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  &.play-left-main {
+    animation-name: moveLeftMain;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  &.disabled-main {
+    pointer-events: none;
   }
 }

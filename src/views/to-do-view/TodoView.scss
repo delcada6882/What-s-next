@@ -1,13 +1,237 @@
+@import "../../variables.scss";
+
+@keyframes moveRightMainBack {
+  0% {
+    transform: translateX(
+      calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
+    );
+  }
+  20% {
+    transform: translateX(
+      calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
+    );
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes moveLeftMainBack {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
+    );
+  }
+}
+
 // #todo-view {}
 #fill-back {
-  position: relative;
+  transform: translateX(0);
+  position: absolute;
   background-color: var(--background-color);
   // background-color: green;
-  width: 100vw;
+  width: 150vw;
   height: 100vh;
   z-index: 3;
   transition: 0.2s;
-  // clip-path: circle(50% at 50% 50%);
+  top: 0;
+  clip-path: url(#myClip);
+  $duration: 1.5s;
+  &.play-right-main-back {
+    animation-name: moveRightMainBack;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  &.play-left-main-back {
+    animation-name: moveLeftMainBack;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  // &.disabled-main-back {
+  //   pointer-events: none;
+  // }
+
+  // clip-path: polygon(
+  //   ///This is the outside of the frame.
+  //   0% 0%,
+  //   0% 100%,
+  //   calc(calc(var(--gaps) * 2) + var(--sidebar-size)) 100%,
+
+  //   // This is the top right point
+  //   calc(calc(var(--gaps) * 2) + var(--sidebar-size))
+  //     calc(
+  //       var(--header-size) + calc(calc(var(--gaps) / 4) + var(--border-radius))
+  //     ),
+  //   calc(
+  //       calc(var(--gaps) * 2) +
+  //         calc(var(--sidebar-size) + calc(var(--border-radius) / 8))
+  //     )
+  //     calc(
+  //       var(--header-size) +
+  //         calc(calc(var(--gaps) / 4) + calc(var(--border-radius) / 2))
+  //     ),
+  //   calc(
+  //       calc(var(--gaps) * 2) +
+  //         calc(
+  //           calc(var(--sidebar-size) + 1px) +
+  //             calc(
+  //               calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20)
+  //             )
+  //         )
+  //     )
+  //     calc(
+  //       var(--header-size) + calc(calc(calc(var(--gaps) / 4) + 1px)) +
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     ),
+  //   370px 71.5px,
+  //   380px 69px,
+  //   calc(-39px + 100vw) 69px,
+  //   calc(-29px + 100vw) 71.5px,
+  //   calc(-25px + 100vw) 75px,
+  //   calc(-21.5px + 100vw) 79px,
+  //   calc(-19px + 100vw) 89px,
+  //   calc(-19px + 100vw) calc(-39px + 100vh),
+  //   calc(-21.5px + 100vw) calc(-29px + 100vh),
+  //   calc(-25px + 100vw) calc(-25px + 100vh),
+  //   calc(-29px + 100vw) calc(-21.5px + 100vh),
+  //   calc(-39px + 100vw) calc(-19px + 100vh),
+  //   380px calc(-19px + 100vh),
+  //   370px calc(-21.5px + 100vh),
+  //   366px calc(-25px + 100vh),
+  //   362.5px calc(-29px + 100vh),
+  //   360px calc(-39px + 100vh),
+  //   360px 100%,
+  //   100% 100%,
+  //   100% 0%
+  // );
+
+  // clip-path: polygon(
+  //   0% 0%,
+  //   0% 100%,
+  //   calc(calc(var(--gaps) * 2) + var(--sidebar-size)),
+  //   calc(calc(var(--gaps) * 2) + var(--sidebar-size))
+  //     calc(
+  //       calc(
+  //         calc(var(--header-size) + calc(var(--gaps) / 4)) +
+  //           var(--border-radius)
+  //       )
+  //     ),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) +
+  //         calc(var(--border-radius) / 8)
+  //     )
+  //     calc(
+  //       calc(
+  //         calc(var(--header-size) + calc(var(--gaps) / 4)) +
+  //           calc(var(--border-radius) / 2)
+  //       )
+  //     ),
+  //   calc(
+  //       calc(calc(calc(var(--gaps) * 2) + var(--sidebar-size)) + 1px) +
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     )
+  //     calc(
+  //       calc(calc(var(--header-size) + calc(var(--gaps) / 4)) + 1px) +
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     ),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) +
+  //         calc(var(--border-radius) / 2)
+  //     )
+  //     calc(
+  //       calc(
+  //         calc(var(--header-size) + calc(var(--gaps) / 4)) +
+  //           calc(var(--border-radius) / 8)
+  //       )
+  //     ),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) + var(--border-radius)
+  //     )
+  //     calc(var(--header-size) + calc(var(--gaps) / 4)),
+  //   calc(calc(calc(100vw - var(--gaps)) + 1px) - var(--border-radius))
+  //     calc(var(--header-size) + calc(var(--gaps) / 4)),
+  //   calc(calc(calc(100vw - var(--gaps)) + 1px) - calc(var(--border-radius) / 2))
+  //     calc(
+  //       calc(var(--header-size) + calc(var(--gaps) / 4)) +
+  //         calc(var(--border-radius) / 8)
+  //     ),
+  //   calc(
+  //       calc(calc(100vw - var(--gaps)) + 1px) -
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     )
+  //     calc(
+  //       calc(
+  //           calc(var(--header-size) + calc(var(--gaps) / 4)) +
+  //             calc(var(--border-radius) / 4)
+  //         ) + calc(var(--border-radius) / 20)
+  //     ),
+  //   calc(calc(calc(100vw - var(--gaps)) + 1px) - calc(var(--border-radius) / 8))
+  //     calc(
+  //       calc(
+  //         calc(var(--header-size) + calc(var(--gaps) / 4)) +
+  //           calc(var(--border-radius) / 2)
+  //       )
+  //     ),
+  //   calc(calc(100vw - var(--gaps)) + 1px)
+  //     calc(
+  //       calc(var(--header-size) + calc(var(--gaps) / 4)) + var(--border-radius)
+  //     ),
+  //   calc(calc(100vw - var(--gaps)) + 1px)
+  //     calc(calc(calc(100vh - var(--gaps)) + 1px) - var(--border-radius)),
+  //   calc(calc(calc(100vw - var(--gaps)) + 1px) - calc(var(--border-radius) / 8))
+  //     calc(
+  //       calc(calc(100vh - var(--gaps)) + 1px) - calc(var(--border-radius) / 2)
+  //     ),
+  //   calc(
+  //       calc(calc(100vw - var(--gaps)) + 1px) -
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     )
+  //     calc(
+  //       calc(calc(100vh - var(--gaps)) + 1px) -
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     ),
+  //   calc(calc(calc(100vw - var(--gaps)) + 1px) - calc(var(--border-radius) / 2))
+  //     calc(
+  //       calc(calc(100vh - var(--gaps)) + 1px) - calc(var(--border-radius) / 8)
+  //     ),
+  //   calc(calc(100vw - var(--gaps)) + 1px) calc(calc(100vh - var(--gaps)) + 1px),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) + var(--border-radius)
+  //     )
+  //     calc(calc(100vh - var(--gaps)) + 1px),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) +
+  //         calc(var(--border-radius) / 2)
+  //     )
+  //     calc(
+  //       calc(calc(100vh - var(--gaps)) + 1px) - calc(var(--border-radius) / 8)
+  //     ),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) +
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     )
+  //     calc(
+  //       calc(calc(100vh - var(--gaps)) + 1px) -
+  //         calc(calc(var(--border-radius) / 4) + calc(var(--border-radius) / 20))
+  //     ),
+  //   calc(
+  //       calc(calc(var(--gaps) * 2) + var(--sidebar-size)) +
+  //         calc(var(--border-radius) / 8)
+  //     )
+  //     calc(
+  //       calc(calc(100vh - var(--gaps)) + 1px) - calc(var(--border-radius) / 2)
+  //     ),
+  //   calc(calc(var(--gaps) * 2) + var(--sidebar-size))
+  //     calc(calc(100vh - var(--gaps)) + 1px - var(--border-radius)),
+  //   calc(calc(var(--gaps) * 2) + var(--sidebar-size)) 100%,
+  //   1010rem 100%,
+  //   100% 0%
+  // );
 }
 #background-pattern {
   $background-size: 35px;

@@ -60,6 +60,27 @@
   initial-value: #7411ee;
 }
 
+@property --gaps {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 20px;
+}
+@property --header-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 4rem;
+}
+@property --sidebar-size {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 20rem;
+}
+@property --border-radius {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 20px;
+}
+
 $header-size: 4rem;
 $space-from-edges: 1rem;
 

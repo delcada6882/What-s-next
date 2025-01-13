@@ -7,7 +7,6 @@ function Cursor() {
 
   window.addEventListener("mousemove", (event) => {
     if (mouseRef.current === null) {
-      console.log("Broken");
       return;
     }
     mouseRef.current.style.top = `${event.clientY - 150}px`;
