@@ -93,6 +93,8 @@ function Editbar({
   function goEditbar() {
     hostRef.current?.classList.remove("permanant-summon-left");
     hostRef.current?.classList.remove("permanant-summon-right");
+    hostRef.current?.classList.remove("play-right-edit");
+    hostRef.current?.classList.remove("play-left-edit");
     if (sidebarPos === 1) {
       hostRef.current?.classList.remove("summon-left-edit");
       hostRef.current?.classList.add("go-left-edit");
