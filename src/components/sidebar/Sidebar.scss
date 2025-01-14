@@ -84,7 +84,7 @@
   &.disabled-side {
     pointer-events: none;
   }
-  .notebook-view {
+  .notebooks-view-side {
     position: relative;
     height: calc(100%);
     width: calc(100% - 20px);
@@ -113,6 +113,34 @@
           animation-duration: $duration;
           animation-fill-mode: forwards;
         }
+      }
+    }
+    .add-notebook {
+      // position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      border: 1px solid var(--border-2);
+      margin-bottom: calc(var(--gaps) / 2);
+      border-radius: calc(var(--border-radius) / 4);
+      transition: 0.2s;
+      color: var(--border-2);
+
+      .add {
+        margin-right: 5px;
+        color: var(--border-2);
+        transition: 0.2s;
+      }
+      &:hover {
+        transition: 0.2s;
+        border-color: var(--back-element-5);
+        cursor: pointer;
+        color: var(--back-element-5);
+      }
+      &:hover .add {
+        color: var(--back-element-5);
+        transition: 0.2s;
       }
     }
     .notebook-container {
@@ -144,6 +172,10 @@
       min-height: 20px;
       width: calc(100% - 22px);
       margin-left: 1px;
+      &.selected {
+        background-color: var(--back-element-4);
+        pointer-events: none;
+      }
       &:hover {
         outline-color: var(--border-2);
         cursor: pointer;

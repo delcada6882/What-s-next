@@ -42,6 +42,11 @@
   inherits: true;
   initial-value: #fff;
 }
+@property --back-element-5 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
 
 @property --border-1 {
   syntax: "<color>";
@@ -58,6 +63,21 @@
   syntax: "<color>";
   inherits: true;
   initial-value: #7411ee;
+}
+@property --primary-color-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4f07a7;
+}
+@property --primary-red {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ee1111;
+}
+@property --primary-red-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #a50404;
 }
 
 @property --gaps {

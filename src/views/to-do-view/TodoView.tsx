@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import App from "../../App";
 import Header from "../../components/header/Header";
 import MainContent from "../../components/main-content/MainContent";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -32,23 +31,35 @@ function TodoView() {
   const [maskShape, setMaskShape] = useState<string>("");
 
   const maskRef = useRef<HTMLDivElement>(null);
-  const standardTaskList = {
-    name: "example list",
+  const beginningTaskList = {
+    name: "Tutorial list",
     tasks: [
       {
-        name: "Delete this task",
-        tags: ["daily", "unimportant"],
-        editted: false,
+        name: "Click on the trashcan.",
+        description: "That'll delete me!",
         completed: false,
-        completeDate: "",
+      },
+      {
+        name: "Click on the pencil.",
+        description: "That'll edit me!",
+        completed: false,
+      },
+      {
+        name: "Click on the box on my left.",
+        description: "That'll complete me!",
+        completed: false,
       },
     ],
-    // color: colors[randomNumber],
   };
 
-  const [taskList, setTaskList] = useState<Array<object>>(
-    new Array(50).fill(standardTaskList)
-  );
+  const [taskList, setTaskList] = useState<Array<object>>([
+    { name: "Completed", tasks: [] },
+    beginningTaskList,
+  ]);
+
+  const [notebookViewed, setNotebookViewed] = useState<number>(-1);
+  const [taskView, setTaskView] = useState<any>([0, 0]);
+  const [update, setUpdate] = useState<number>(0);
 
   function changeVariables() {
     document.documentElement.style.setProperty(`--gaps`, `${gaps}px`);
@@ -215,6 +226,10 @@ function TodoView() {
   }, [playAnimation]);
 
   useEffect(() => {
+    console.log(`this is notebookviewed ${notebookViewed}`);
+  }, [notebookViewed]);
+
+  useEffect(() => {
     if (sidebarPos === 0) {
       console.log("Sidebar is Left");
     } else {
@@ -249,8 +264,16 @@ function TodoView() {
         height={sidebarHeight}
         sidebarPos={sidebarPos}
         setSidebarPos={setSidebarPos}
+        editbarOpen={editbarOpen}
+        setEditbarOpen={setEditbarOpen}
         setPlayAnimation={setPlayAnimation}
         taskList={taskList}
+        notebookViewed={notebookViewed}
+        setNotebookViewed={setNotebookViewed}
+        update={update}
+        setUpdate={setUpdate}
+        setTaskView={setTaskView}
+        taskView={taskView}
       />
       <MainContent
         gap={gaps}
@@ -265,8 +288,15 @@ function TodoView() {
         sidebarPos={sidebarPos}
         playAnimation={playAnimation}
         taskList={taskList}
+        setTaskList={setTaskList}
         setEditbarOpen={setEditbarOpen}
         editbarOpen={editbarOpen}
+        notebookViewed={notebookViewed}
+        setNotebookViewed={setNotebookViewed}
+        setTaskView={setTaskView}
+        taskView={taskView}
+        update={update}
+        setUpdate={setUpdate}
       />
       <Editbar
         gap={gaps}
@@ -284,6 +314,10 @@ function TodoView() {
         taskList={taskList}
         setEditbarOpen={setEditbarOpen}
         editbarOpen={editbarOpen}
+        taskView={taskView}
+        setTaskList={setTaskList}
+        update={update}
+        setUpdate={setUpdate}
       />
     </div>
   );

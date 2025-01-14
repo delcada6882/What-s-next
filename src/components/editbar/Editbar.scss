@@ -121,7 +121,7 @@
     left: calc(var(--gaps)) !important;
   }
 
-  .notebook-view {
+  .edit-view {
     position: relative;
     height: calc(100%);
     width: calc(100% - 20px);
@@ -133,66 +133,36 @@
       align-items: center;
       height: calc(var(--gaps) * 2);
       min-height: 40px;
-      .arrow-right {
-        border-radius: calc(var(--border-radius) / 2);
-        padding: 2px 10px;
+      .add {
+        transform: rotate(45deg);
         &:hover {
-          background-color: var(--border-1);
           cursor: pointer;
         }
       }
     }
-    .notebook-container {
+    .edit-space {
       position: relative;
-      display: flex;
-      flex-flow: column nowrap;
-      width: 100%;
-      height: calc(93% - calc(calc(var(--gaps) * 2) + 35px));
-      padding-top: 1px;
-      // border-bottom: 1px solid var(--border-2);
-      scrollbar-width: 0;
-      &::-webkit-scrollbar {
-        width: 5px;
-        padding-left: 20px;
+      height: calc(100% - calc(var(--gaps) * 2));
+      textarea {
+        padding: 5px;
+        border: none;
+        background-color: var(--back-element-2);
+        width: calc(100% - 10px);
+        min-height: 3rem;
+        border-radius: calc(var(--border-radius) / 2);
+        outline: none;
       }
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--back-element-4);
-        border-radius: var(--border-radius);
-      }
-      overflow-y: scroll;
-    }
-    .notebook {
-      margin-bottom: 5px;
-      background-color: var(--back-element-2);
-      padding: 10px;
-      border-radius: calc(var(--border-radius) / 4);
-      outline: 1px solid var(--back-element-1);
-      // height: var(--gaps);
-      min-height: 20px;
-      width: calc(100% - 22px);
-      margin-left: 1px;
-      &:hover {
-        outline-color: var(--border-2);
-        cursor: pointer;
-      }
-      &.selection {
-        background-color: var(--back-element-3);
-      }
-    }
-    .view-all {
-      position: absolute;
-      bottom: 0;
-      height: calc(calc(var(--gaps) * 2) + 45px);
-      width: calc(100% - 20px);
-      background-color: var(--back-element-1);
-      border-top: 1px solid var(--border-2);
-      .notebook {
+      button {
+        background-color: var(--primary-color);
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: (var(--border-radius));
         position: absolute;
-        top: var(--gaps);
-        margin-bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        bottom: var(--gaps);
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }

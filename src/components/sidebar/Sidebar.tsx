@@ -1,6 +1,7 @@
 import { LegacyRef, useEffect, useRef, useState } from "react";
 import "./Sidebar.scss";
 import ArrowRight from "../../svg/ArrowRight";
+import Add from "../../svg/Add";
 
 function Sidebar({
   gap,
@@ -15,6 +16,14 @@ function Sidebar({
   setSidebarPos,
   setPlayAnimation,
   taskList,
+  notebookViewed,
+  setNotebookViewed,
+  update,
+  setUpdate,
+  editbarOpen,
+  setEditbarOpen,
+  setTaskView,
+  taskView,
 }: {
   gap: number;
   headerSize: number;
@@ -28,6 +37,14 @@ function Sidebar({
   setSidebarPos: Function;
   setPlayAnimation: Function;
   taskList: Array<object>;
+  notebookViewed: number;
+  setNotebookViewed: Function;
+  update: number;
+  setUpdate: Function;
+  editbarOpen: boolean;
+  setEditbarOpen: Function;
+  setTaskView: Function;
+  taskView: Array<number>;
 }) {
   const [finalStyle, setFinalStyle] = useState<any>();
 
@@ -57,6 +74,14 @@ function Sidebar({
     makeStyle();
   }, [sidebarPos]);
 
+  useEffect(() => {
+    if (editbarOpen) {
+      hostRef.current?.classList.add("blackout");
+    } else {
+      hostRef.current?.classList.remove("blackout");
+    }
+  }, [editbarOpen]);
+
   function moveSidebar() {
     if (hostRef.current?.classList.contains("play-right-side")) {
       setSidebarPos(0);
@@ -76,6 +101,11 @@ function Sidebar({
     }
   }
 
+  function createNotebook() {
+    setEditbarOpen(true);
+    setTaskView([0, 0, 2]);
+  }
+
   return (
     <div
       id="sidebar"
@@ -90,22 +120,44 @@ function Sidebar({
         hostRef.current?.classList.remove("disabled-side");
       }}
     >
-      <div className="notebook-view">
+      <div className="notebooks-view-side">
         <div className="top">
           <h2>Task List</h2>
           <ArrowRight ref={arrowRef} onClick={moveSidebar} />
         </div>
+        <div
+          className="add-notebook"
+          onClick={() => {
+            createNotebook();
+          }}
+        >
+          <Add />
+          <p>Add notebook</p>
+        </div>
         <div className="notebook-container">
           {taskList.map((data: any, index) => {
             return (
-              <div className="notebook" key={index}>
+              <div
+                className={`notebook ${
+                  notebookViewed === index ? "selected" : ""
+                }`}
+                key={index}
+                onClick={() => {
+                  setNotebookViewed(index);
+                }}
+              >
                 <p>{data.name}</p>
               </div>
             );
           })}
         </div>
         <div className="view-all">
-          <div className="notebook">
+          <div
+            className={`notebook ${notebookViewed === -1 ? "selected" : ""}`}
+            onClick={() => {
+              setNotebookViewed(-1);
+            }}
+          >
             <p>View all</p>
           </div>
         </div>

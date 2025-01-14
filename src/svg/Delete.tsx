@@ -1,6 +1,6 @@
 import { LegacyRef, MutableRefObject } from "react";
 
-function TrashCan({
+function Delete({
   ref,
   onClick,
 }: {
@@ -14,7 +14,7 @@ function TrashCan({
       viewBox="0 -960 960 960"
       width="24px"
       fill="currentColor"
-      className="trash-can icon"
+      className="delete icon"
       ref={ref}
       onClick={onClick}
     >
@@ -23,4 +23,4 @@ function TrashCan({
   );
 }
 
-export default TrashCan;
+export default Delete;
