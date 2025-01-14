@@ -3,27 +3,119 @@
 @keyframes moveRightMain {
   0% {
     left: var(--gaps);
+    transform: scale(1);
+    outline: 0px solid var(--background-color);
   }
   20% {
+    transform: scale(0.95);
+    outline: 40px solid var(--background-color);
     left: var(--gaps);
   }
-  100% {
+  80% {
+    transform: scale(0.95);
     left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+    outline: 40px solid var(--background-color);
+  }
+  100% {
+    transform: scale(1);
+    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+    outline: 0px solid var(--background-color);
   }
 }
 @keyframes moveLeftMain {
-  0% {
-    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
-  }
-  20% {
-    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
-  }
   100% {
     left: var(--gaps);
+    transform: scale(1);
+    outline: 0px solid var(--background-color);
+  }
+  80% {
+    transform: scale(0.95);
+    left: var(--gaps);
+    outline: 40px solid var(--background-color);
+  }
+  20% {
+    transform: scale(0.95);
+    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+    outline: 40px solid var(--background-color);
+  }
+  0% {
+    transform: scale(1);
+    left: calc(var(--sidebar-size) + calc(var(--gaps) * 2));
+    outline: 0px solid var(--background-color);
+  }
+}
+
+@keyframes moveSmall {
+  100% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  20% {
+    transform: scale(0.95);
+  }
+  0% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shrinkRight {
+  0% {
+    width: calc(100vw - calc(var(--sidebar-size) + calc(var(--gaps) * 3)));
+    outline: 0px solid var(--background-color);
+  }
+  100% {
+    width: calc(
+      100vw - calc(calc(var(--sidebar-size) * 2) + calc(var(--gaps) * 4))
+    );
+    outline: var(--gaps) solid var(--background-color);
+  }
+}
+@keyframes growRight {
+  100% {
+    width: calc(100vw - calc(var(--sidebar-size) + calc(var(--gaps) * 3)));
+    outline: 0px solid var(--background-color);
+  }
+  0% {
+    width: calc(
+      100vw - calc(calc(var(--sidebar-size) * 2) + calc(var(--gaps) * 4))
+    );
+    outline: var(--gaps) solid var(--background-color);
+  }
+}
+
+@keyframes shrinkLeft {
+  0% {
+    left: var(--gaps);
+    width: calc(100vw - calc(var(--sidebar-size) + calc(var(--gaps) * 3)));
+    outline: 0px solid var(--background-color);
+  }
+  100% {
+    left: calc(calc(var(--gaps) * 2) + var(--sidebar-size));
+    width: calc(
+      100vw - calc(calc(var(--sidebar-size) * 2) + calc(var(--gaps) * 4))
+    );
+    outline: var(--gaps) solid var(--background-color);
+  }
+}
+@keyframes growLeft {
+  100% {
+    left: var(--gaps);
+    width: calc(100vw - calc(var(--sidebar-size) + calc(var(--gaps) * 3)));
+    outline: 0px solid var(--background-color);
+  }
+  0% {
+    left: calc(calc(var(--gaps) * 2) + var(--sidebar-size));
+    width: calc(
+      100vw - calc(calc(var(--sidebar-size) * 2) + calc(var(--gaps) * 4))
+    );
+    outline: var(--gaps) solid var(--background-color);
   }
 }
 
 #main-content {
+  outline-color: var(--background-color);
   background-color: transparent;
   border: 1px solid var(--border-1);
   position: fixed;
@@ -32,6 +124,86 @@
   top: 0;
   z-index: 3;
   transition: 0.2s;
+
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  .notebooks-view {
+    overflow-y: hidden;
+    z-index: 0;
+    overflow-x: scroll;
+    position: absolute;
+    top: var(--gaps);
+    width: 100%;
+    height: calc(100% - calc(var(--gaps) * 1));
+    display: flex;
+    flex-flow: row nowrap;
+    &::-webkit-scrollbar {
+      height: 5px;
+      width: 10%;
+      padding-left: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      margin: 0 var(--border-radius);
+      margin-right: 20px; /* Adjust this value to control the bottom margin */
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--back-element-4);
+      border-radius: var(--border-radius);
+    }
+
+    .notebook-main {
+      margin: 0 calc(var(--gaps) / 2);
+      width: 15rem;
+      height: calc(100% - calc(var(--gaps) * 1));
+      background-color: color-mix(
+        in srgb,
+        var(--primary-color) 5%,
+        transparent 100%
+      );
+      backdrop-filter: blur(2px);
+      border-radius: var(--border-radius);
+      border: 1px solid
+        color-mix(in srgb, var(--border-2) 30%, transparent 100%);
+      .top {
+        display: flex;
+        height: var(--gaps);
+        min-height: 30px;
+        justify-content: center;
+        border-bottom: 1px solid rgba($color: #fff, $alpha: 0.1);
+        align-items: center;
+        p {
+          position: absolute;
+          width: calc(100% - 10px);
+          text-align: center;
+        }
+        .add {
+          position: absolute;
+          right: 10px;
+        }
+      }
+      .tasks {
+        // width: 100%;
+        width: 15rem;
+        display: flex;
+        align-items: center;
+        flex-flow: column nowrap;
+
+        .task {
+          margin-top: 10px;
+          backdrop-filter: blur(2000px);
+          border-radius: 10px;
+          width: 90%;
+          // min-width: 15rem;
+          min-height: 4rem;
+          border: 1px solid rgba(white, $alpha: 0.1);
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
   p {
     padding: 10px;
   }
@@ -39,14 +211,53 @@
   &.play-right-main {
     animation-name: moveRightMain;
     animation-duration: $duration;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
   }
   &.play-left-main {
     animation-name: moveLeftMain;
     animation-duration: $duration;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
+  }
+  &.play-small {
+    animation-name: moveSmall;
+    animation-duration: $duration;
+    animation-fill-mode: both;
+  }
+  &.shrink-left {
+    animation-name: shrinkLeft;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+  }
+  &.shrink-right {
+    animation-name: shrinkRight;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+  }
+  &.grow-right {
+    animation-name: growRight;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+  }
+  &.grow-left {
+    animation-name: growLeft;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
   }
   &.disabled-main {
     pointer-events: none;
+  }
+
+  &.permanant-shrink-left {
+    left: calc(calc(var(--gaps) * 2) + var(--sidebar-size)) !important;
+    width: calc(
+      100vw - calc(calc(var(--sidebar-size) * 2) + calc(var(--gaps) * 4))
+    ) !important;
+    outline: var(--gaps) solid var(--background-color);
+  }
+  &.permanant-shrink-right {
+    width: calc(
+      100vw - calc(calc(var(--sidebar-size) * 2) + calc(var(--gaps) * 4))
+    ) !important;
+    outline: var(--gaps) solid var(--background-color);
   }
 }

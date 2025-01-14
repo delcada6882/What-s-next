@@ -2,30 +2,46 @@
 
 @keyframes moveRightMainBack {
   0% {
+    transform: scale(1);
     transform: translateX(
       calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
     );
   }
   20% {
+    transform: scale(0.95);
     transform: translateX(
       calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
     );
   }
+  80% {
+    transform: scale(0.95);
+    transform: translateX(0);
+  }
   100% {
+    transform: scale(1);
     transform: translateX(0);
   }
 }
 @keyframes moveLeftMainBack {
-  0% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(0);
-  }
   100% {
+    transform: scale(1);
     transform: translateX(
       calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
     );
+  }
+  80% {
+    transform: scale(0.95);
+    transform: translateX(
+      calc(calc(calc(var(--gaps) * 1) + var(--sidebar-size)) * -1)
+    );
+  }
+  20% {
+    transform: scale(0.95);
+    transform: translateX(0);
+  }
+  0% {
+    transform: scale(1);
+    transform: translateX(0);
   }
 }
 

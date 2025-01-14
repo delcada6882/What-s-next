@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./MainContent.scss";
+import Add from "../../svg/Add";
 
 function MainContent({
   gap,
@@ -13,6 +14,9 @@ function MainContent({
   height,
   sidebarPos,
   playAnimation,
+  taskList,
+  setEditbarOpen,
+  editbarOpen,
 }: {
   gap: number;
   headerSize: number;
@@ -25,6 +29,9 @@ function MainContent({
   height?: number;
   sidebarPos: number;
   playAnimation: boolean;
+  taskList: Array<object>;
+  setEditbarOpen: Function;
+  editbarOpen: boolean;
 }) {
   const [finalStyle, setFinalStyle] = useState<any>();
 
@@ -50,18 +57,64 @@ function MainContent({
   }
 
   function moveMainBox() {
-    if (hostRef.current?.classList.contains("play-left-main")) {
-      hostRef.current?.classList.remove("play-left-main");
-      hostRef.current?.classList.add("play-right-main");
+    hostRef.current?.classList.remove("grow-right");
+    hostRef.current?.classList.remove("grow-left");
+    // hostRef.current?.classList.remove("shrink-left");
+    // hostRef.current?.classList.remove("shrink-right");
+    if (editbarOpen) {
+      console.log("EIOGJSIG");
+      hostRef.current?.classList.add("play-small");
+      return;
     } else {
-      hostRef.current?.classList.remove("play-right-main");
-      hostRef.current?.classList.add("play-left-main");
+      hostRef.current?.classList.remove("shrink-right");
+      hostRef.current?.classList.remove("shrink-left");
+      if (sidebarPos === 0) {
+        hostRef.current?.classList.remove("play-left-main");
+        hostRef.current?.classList.add("play-right-main");
+      } else {
+        hostRef.current?.classList.remove("play-right-main");
+        hostRef.current?.classList.add("play-left-main");
+      }
+    }
+  }
+
+  function makeMainBoxSmaller() {
+    hostRef.current?.classList.remove("grow-right");
+    hostRef.current?.classList.remove("grow-left");
+    hostRef.current?.classList.remove("play-left-main");
+    hostRef.current?.classList.remove("play-right-main");
+    if (sidebarPos === 0) {
+      hostRef.current?.classList.remove("shrink-left");
+      hostRef.current?.classList.add("shrink-right");
+    } else {
+      hostRef.current?.classList.remove("play-left-main");
+      hostRef.current?.classList.add("shrink-left");
+      hostRef.current?.classList.remove("shrink-right");
+    }
+  }
+  function makeMainBoxGrow() {
+    if (sidebarPos === 0) {
+      hostRef.current?.classList.remove("permanant-shrink-right");
+      hostRef.current?.classList.remove("permanant-shrink-left");
+      hostRef.current?.classList.add("grow-right");
+    } else {
+      hostRef.current?.classList.add("grow-left");
+      hostRef.current?.classList.remove("permanant-shrink-left");
+      hostRef.current?.classList.remove("permanant-shrink-right");
     }
   }
 
   useEffect(() => {
     makeStyle();
-  }, []);
+  }, [sidebarPos]);
+
+  useEffect(() => {
+    if (editbarOpen) {
+      makeMainBoxSmaller();
+    } else {
+      makeMainBoxGrow();
+    }
+  }, [editbarOpen]);
 
   useEffect(() => {
     if (playAnimation) {
@@ -70,8 +123,60 @@ function MainContent({
   }, [playAnimation]);
 
   return (
-    <div id="main-content" ref={hostRef} style={finalStyle}>
-      <p>Main content</p>
+    <div
+      id="main-content"
+      ref={hostRef}
+      style={finalStyle}
+      onAnimationStart={() => {
+        hostRef.current?.classList.add("disabled-main");
+      }}
+      onAnimationEnd={() => {
+        hostRef.current?.classList.remove("play-small");
+        hostRef.current?.classList.remove("disabled-main");
+
+        if (hostRef.current?.classList.contains("shrink-left")) {
+          hostRef.current?.classList.remove("shrink-left");
+          hostRef.current?.classList.add("permanant-shrink-left");
+        }
+        if (hostRef.current?.classList.contains("shrink-right")) {
+          hostRef.current?.classList.remove("shrink-right");
+          hostRef.current?.classList.add("permanant-shrink-right");
+        }
+      }}
+    >
+      {/* <p>Main content</p> */}
+      <div className="notebooks-view">
+        {taskList.map((data: any, index) => {
+          return (
+            <div className="notebook-main">
+              <div className="top">
+                <p>{data.name}</p>
+                <Add
+                  onClick={() => {
+                    setEditbarOpen(false);
+                  }}
+                />
+              </div>
+              <div className="tasks">
+                {data.tasks.map((task: any, index: number) => {
+                  return (
+                    <div
+                      className="task"
+                      onClick={() => {
+                        setEditbarOpen(true);
+                        console.log("here");
+                      }}
+                    >
+                      <p key={index}>{task.name}</p>
+                    </div>
+                  );
+                })}
+                {/* {JSON.stringify(data.tasks)} */}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

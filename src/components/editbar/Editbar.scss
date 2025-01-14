@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 
-@keyframes moveRightSide {
+@keyframes moveRightEdit {
   0% {
     left: var(--gaps);
   }
@@ -12,57 +12,65 @@
   }
   100% {
     left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
-  }
-}
-@keyframes moveLeftSide {
-  0% {
-    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
-  }
-  20% {
-    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
-  }
-  80% {
-    left: var(--gaps);
-  }
-  100% {
-    left: var(--gaps);
-  }
-}
-@keyframes arrowRotateRight {
-  0% {
-    transform: rotate(0deg);
-  }
-  20% {
-    transform: rotate(0deg);
-  }
-  80% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-@keyframes arrowRotateLeft {
-  0% {
-    transform: rotate(180deg);
-  }
-  20% {
-    transform: rotate(180deg);
-  }
-  80% {
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }
 
-#sidebar {
+@keyframes moveLeftedit {
+  0% {
+    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
+  }
+  20% {
+    left: calc(100vw - (var(--sidebar-size) + var(--gaps)));
+  }
+  80% {
+    left: var(--gaps);
+  }
+  100% {
+    left: var(--gaps);
+  }
+}
+
+@keyframes summonLeft {
+  0% {
+    left: calc(calc(var(--sidebar-size) * -1));
+  }
+  100% {
+    left: calc(var(--gaps));
+  }
+}
+@keyframes goLeft {
+  100% {
+    left: calc(calc(var(--sidebar-size) * -1));
+  }
+  0% {
+    left: calc(var(--gaps));
+  }
+}
+
+@keyframes summonRight {
+  0% {
+    left: calc(100vw + var(--sidebar-size));
+  }
+  100% {
+    left: calc(100vw - calc(var(--sidebar-size) + var(--gaps)));
+  }
+}
+@keyframes goRight {
+  100% {
+    left: calc(100vw + var(--sidebar-size));
+  }
+  0% {
+    left: calc(100vw - calc(var(--sidebar-size) + var(--gaps)));
+  }
+}
+
+#editbar {
   background-color: var(--back-element-1);
   position: absolute;
   border: 1px solid var(--border-1);
   z-index: 4;
-  transition: 0.1s;
+  // transition: 0.2s;
+
   // overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 0;
@@ -71,19 +79,48 @@
     position: relative;
   }
   $duration: 1.5s;
-  &.play-right-side {
-    animation-name: moveRightSide;
+  &.play-right-edit {
+    animation-name: moveRightEdit;
     animation-duration: $duration;
     animation-fill-mode: forwards;
   }
-  &.play-left-side {
-    animation-name: moveLeftSide;
+  &.play-left-edit {
+    animation-name: moveLeftedit;
     animation-duration: $duration;
     animation-fill-mode: forwards;
   }
-  &.disabled-side {
+  &.disabled-edit {
     pointer-events: none;
   }
+
+  &.summon-left-edit {
+    animation-name: summonLeft;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+  &.go-left-edit {
+    animation-name: goLeft;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+  &.summon-right-edit {
+    animation-name: summonRight;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+  &.go-right-edit {
+    animation-name: goRight;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  &.permanant-summon-right {
+    left: calc(100vw - calc(var(--sidebar-size) + var(--gaps))) !important;
+  }
+  &.permanant-summon-left {
+    left: calc(var(--gaps)) !important;
+  }
+
   .notebook-view {
     position: relative;
     height: calc(100%);
@@ -102,16 +139,6 @@
         &:hover {
           background-color: var(--border-1);
           cursor: pointer;
-        }
-        &.rotate-right {
-          animation-name: arrowRotateRight;
-          animation-duration: $duration;
-          animation-fill-mode: forwards;
-        }
-        &.rotate-left {
-          animation-name: arrowRotateLeft;
-          animation-duration: $duration;
-          animation-fill-mode: forwards;
         }
       }
     }

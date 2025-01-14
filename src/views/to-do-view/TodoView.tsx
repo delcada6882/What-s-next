@@ -6,14 +6,16 @@ import Sidebar from "../../components/sidebar/Sidebar";
 
 import "./TodoView.scss";
 import Cursor from "../../components/cursor/Cursor";
+import Editbar from "../../components/editbar/Editbar";
 
 function TodoView() {
   const [sidebarPos, setSidebarPos] = useState<number>(0);
+  const [editbarOpen, setEditbarOpen] = useState<boolean>(false);
   const [playAnimation, setPlayAnimation] = useState(false);
 
-  const [gaps, setGaps] = useState(20);
+  const [gaps, setGaps] = useState(30);
   const [headerSize, setHeaderSize] = useState(4 * 16);
-  const [sidebarSize, setSidebarSize] = useState(20 * 16);
+  const [sidebarSize, setSidebarSize] = useState(15 * 16);
   const [borderRadius, setBorderRadius] = useState(20);
 
   const [freeform, setFreeform] = useState(false);
@@ -30,6 +32,23 @@ function TodoView() {
   const [maskShape, setMaskShape] = useState<string>("");
 
   const maskRef = useRef<HTMLDivElement>(null);
+  const standardTaskList = {
+    name: "example list",
+    tasks: [
+      {
+        name: "Delete this task",
+        tags: ["daily", "unimportant"],
+        editted: false,
+        completed: false,
+        completeDate: "",
+      },
+    ],
+    // color: colors[randomNumber],
+  };
+
+  const [taskList, setTaskList] = useState<Array<object>>(
+    new Array(50).fill(standardTaskList)
+  );
 
   function changeVariables() {
     document.documentElement.style.setProperty(`--gaps`, `${gaps}px`);
@@ -191,10 +210,21 @@ function TodoView() {
 
   useEffect(() => {
     if (playAnimation) {
-      console.log("MOVE THE MAING GUY");
       moveMask();
     }
   }, [playAnimation]);
+
+  useEffect(() => {
+    if (sidebarPos === 0) {
+      console.log("Sidebar is Left");
+    } else {
+      console.log("Sidebar is Right");
+    }
+  }, [sidebarPos]);
+
+  useEffect(() => {
+    console.log(`editbar open is ${editbarOpen}`);
+  }, [editbarOpen]);
 
   return (
     <div id="todo-view">
@@ -220,6 +250,7 @@ function TodoView() {
         sidebarPos={sidebarPos}
         setSidebarPos={setSidebarPos}
         setPlayAnimation={setPlayAnimation}
+        taskList={taskList}
       />
       <MainContent
         gap={gaps}
@@ -233,6 +264,26 @@ function TodoView() {
         width={mainContentWidth}
         sidebarPos={sidebarPos}
         playAnimation={playAnimation}
+        taskList={taskList}
+        setEditbarOpen={setEditbarOpen}
+        editbarOpen={editbarOpen}
+      />
+      <Editbar
+        gap={gaps}
+        headerSize={headerSize}
+        width={sidebarSize}
+        borderRadius={borderRadius}
+        debug={freeform}
+        left={sidebarLeft}
+        top={sidebarTop}
+        height={sidebarHeight}
+        sidebarPos={sidebarPos}
+        setSidebarPos={setSidebarPos}
+        setPlayAnimation={setPlayAnimation}
+        playAnimation={playAnimation}
+        taskList={taskList}
+        setEditbarOpen={setEditbarOpen}
+        editbarOpen={editbarOpen}
       />
     </div>
   );
